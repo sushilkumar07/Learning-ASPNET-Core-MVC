@@ -18,6 +18,11 @@ namespace ExploreCalifornia.Controllers
         /*model binding*/
         public IActionResult Post(string id)
         {
+            /*View bag is the dyamic object*/
+            ViewBag.Title = "First blog mvc learining";
+            ViewBag.Posted = DateTime.Now;
+            ViewBag.Author = "Sushilkumar Shinde";
+            ViewBag.Body = "This is learning blog... keep doing practices";
             //return new ContentResult { Content = id };
             return View();
         }
