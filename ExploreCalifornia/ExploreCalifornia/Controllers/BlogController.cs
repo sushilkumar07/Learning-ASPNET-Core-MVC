@@ -16,6 +16,8 @@ namespace ExploreCalifornia.Controllers
             return View();
         }
 
+       
+
         /*model binding*/
         public IActionResult Post(string id)
         {
@@ -48,5 +50,10 @@ namespace ExploreCalifornia.Controllers
             //return View();
         }
 
+        [Route("blog/create")]
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
