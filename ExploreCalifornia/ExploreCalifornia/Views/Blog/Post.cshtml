@@ -1,18 +1,29 @@
-﻿
+﻿@model ExploreCalifornia.Models.Post
+
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Post";
 }
-<article class="blog-post">
-    <h1>@ViewBag.Title</h1>
-    <div class="details">
-        Posted : <span>@ViewBag.Posted</span> by 
-        <span>@ViewBag.Author</span>
-    </div>
-    <div class="content">
-        @ViewBag.Body
-    </div>
+    <article class="blog-post">
+        @*<h1>@ViewBag.Title</h1>
+        <div class="details">
+            Posted : <span>@ViewBag.Posted</span> by
+            <span>@ViewBag.Author</span>
+        </div>
+        <div class="content">
+            @ViewBag.Body
+        </div>*@
 
-</article>
+        @*/*Render data with strongly typed view we are using Model instend of viewbag*/*@
+        <h1>@Model.Title</h1>
+        <div class="details">
+            Posted : <span>@Model.Posted</span> by
+            <span>@Model.Author</span>
+        </div>
+        <div class="content">
+            @Model.Body
+        </div>
+
+    </article>
 
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExploreCalifornia.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExploreCalifornia.Controllers
@@ -18,13 +19,21 @@ namespace ExploreCalifornia.Controllers
         /*model binding*/
         public IActionResult Post(string id)
         {
+            /*Render data with strongly typed view we are using Model instend of viewbag*/
+            var post = new Post
+            {
+                Author = "Sushilkumar Shinde",
+                Title = "First blog mvc learining",
+                Body = "This is learning blog... keep doing practices",
+                Posted = DateTime.Now
+            };
             /*View bag is the dyamic object*/
-            ViewBag.Title = "First blog mvc learining";
-            ViewBag.Posted = DateTime.Now;
-            ViewBag.Author = "Sushilkumar Shinde";
-            ViewBag.Body = "This is learning blog... keep doing practices";
+            //ViewBag.Title = "First blog mvc learining";
+            //ViewBag.Posted = DateTime.Now;
+            //ViewBag.Author = "Sushilkumar Shinde";
+            //ViewBag.Body = "This is learning blog... keep doing practices";
             //return new ContentResult { Content = id };
-            return View();
+            return View(post);
         }
         //[Route("blog/{year:int}/{month:int}/{key}")]
         //public IActionResult Post(int year, int month, string key)
