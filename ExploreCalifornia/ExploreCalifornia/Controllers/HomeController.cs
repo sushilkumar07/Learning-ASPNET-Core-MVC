@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExploreCalifornia.Controllers
 {
-    public class HomeController //: Controller
+    public class HomeController : Controller
     {
-        public string Index()
+        public IActionResult Index()
         {
-            return "Hello from home controller";
-           // return View("Return view");
+           /// return "Hello from home controller";
+            return View();
         }
     }
 }
