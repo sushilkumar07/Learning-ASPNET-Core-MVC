@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExploreCalifornia.dbcontext;
 using ExploreCalifornia.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,11 @@ namespace ExploreCalifornia.Controllers
 {
     public class BlogController : Controller
     {
+        private readonly BlogDataContext _db;
+        public BlogController(BlogDataContext db)
+        {
+            _db = db;
+        }
         [Route("blog/")] // Controller level attribute routing 
         public IActionResult Index()
         {
@@ -66,6 +72,9 @@ namespace ExploreCalifornia.Controllers
 
             post.Author = User.Identity.Name;
             post.Posted = DateTime.Now;
+
+            _db.Posts.Add(post);
+            _db.SaveChanges();
             return View();
         }
     }
