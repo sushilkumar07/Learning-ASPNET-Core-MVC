@@ -7,14 +7,18 @@
 <fieldset>
     @using (Html.BeginForm())
     {
+        @Html.ValidationSummary();
+
         <p>
             @Html.LabelFor(x => x.Title)
             @Html.EditorFor(x => x.Title)
+            @Html.ValidationMessageFor(x =>x.Title)
         </p>
 
         <p>
             @Html.LabelFor(x => x.Body)
-            @Html.TextBoxFor(x => x.Body)
+            @Html.EditorFor(x => x.Body)
+            @Html.ValidationMessageFor(x => x.Body)
         </p>
 
         <p>

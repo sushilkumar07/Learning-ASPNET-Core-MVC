@@ -16,7 +16,7 @@ namespace ExploreCalifornia.Controllers
             return View();
         }
 
-       
+
 
         /*model binding*/
         public IActionResult Post(string id)
@@ -57,10 +57,13 @@ namespace ExploreCalifornia.Controllers
             return View();
         }
 
-        [HttpPost,Route("blog/create")]
-       
+        [HttpPost, Route("blog/create")]
+
         public IActionResult Create(Post post)
         {
+            if (!ModelState.IsValid)
+                return View();
+
             post.Author = User.Identity.Name;
             post.Posted = DateTime.Now;
             return View();
