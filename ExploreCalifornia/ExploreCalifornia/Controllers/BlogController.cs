@@ -11,15 +11,15 @@ namespace ExploreCalifornia.Controllers
         [Route("blog/")] // Controller level attribute routing 
         public IActionResult Index()
         {
-            return new ContentResult { Content = "Blog post" };
-            //return View();
+            //return new ContentResult { Content = "Blog post" };
+            return View();
         }
 
         /*model binding*/
         public IActionResult Post(string id)
         {
-            return new ContentResult { Content = id };
-            //return View();
+            //return new ContentResult { Content = id };
+            return View();
         }
         //[Route("blog/{year:int}/{month:int}/{key}")]
         //public IActionResult Post(int year, int month, string key)
