@@ -50,9 +50,19 @@ namespace ExploreCalifornia.Controllers
             //return View();
         }
 
-        [Route("blog/create")]
+        [HttpGet, Route("blog/create")]
         public IActionResult Create()
         {
+
+            return View();
+        }
+
+        [HttpPost,Route("blog/create")]
+       
+        public IActionResult Create(Post post)
+        {
+            post.Author = User.Identity.Name;
+            post.Posted = DateTime.Now;
             return View();
         }
     }
