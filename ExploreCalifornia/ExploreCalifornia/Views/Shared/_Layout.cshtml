@@ -49,7 +49,7 @@
                             @*<li><a href="/blog" title="read our blog!">Read our Blog</a></li>*@
                             @*here we are using HTML-HELEPER  tag*@
                             <li>@Html.ActionLink("Read our Blog", "Index", "Blog", null, new { title = "read our blog" })</li>
-                            <li><a href="@Url.Action("Index", "Blog")", title="read our blog!">Read our Blog</a> </li>
+                            <li><a href="@Url.Action("Index", "Blog")" , title="read our blog!">Read our Blog</a> </li>
 
                             <li><a href="explorers/gallery.htm" title="contributor photos">Tour Photos</a></li>
                             <li><a href="_video/EC_podcast_full version.mov" title="check out our podcast">Video podcast</a></li>
@@ -65,13 +65,16 @@
             </nav>
         </header>
         <section id="actionCall">
-            <h1>Explore our world your way</h1>
-            <a href="/tours.htm" title="Find your tour!"><h2>Find your tour</h2></a>
+            @*Using multiple Section*@
+            @*@RenderSection("header")*@
+            @*then it wil not render where tag not define*@
+            @RenderSection("header", false)
+
         </section>
         <div id="contentWrapper">
             <section id="mainContent">
                 @RenderBody()
-                
+
             </section>
             <aside id="secondaryContent">
                 <div id="specials" class="callOut">
