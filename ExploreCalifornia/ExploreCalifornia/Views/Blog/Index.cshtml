@@ -1,4 +1,4 @@
-﻿
+﻿@*@model ExploreCalifornia.Models.Post*@
 @{
     Layout = "_Layout";
 }
@@ -8,6 +8,19 @@
     Below are a few of the latest posts from some of exploeres.
 </p>
 
-<div class="blog-post">
-       TODO : Blog posts will go here.
+<div class="blog-post">    
+    TODO : Blog posts will go here.
+    @foreach(var posts in Model)
+    {
+    
+    <h1>@Model.Title</h1>
+    <div class="details">
+        Posted : <span>@Model.Posted</span> by
+        <span>@Model.Author</span>
+    </div>
+    <div class="content">
+        @Model.Body
+    </div>
+     }
 </div>
+

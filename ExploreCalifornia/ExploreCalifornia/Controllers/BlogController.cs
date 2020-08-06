@@ -18,8 +18,9 @@ namespace ExploreCalifornia.Controllers
         [Route("blog/")] // Controller level attribute routing 
         public IActionResult Index()
         {
+            var posts = _db.Posts.OrderByDescending(x => x.Posted).ToList();
             //return new ContentResult { Content = "Blog post" };
-            return View();
+            return View(posts);
         }
 
 
