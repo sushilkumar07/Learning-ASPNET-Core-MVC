@@ -1,7 +1,7 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@inject ExploreCalifornia.Models.FormattingService Format
 @model ExploreCalifornia.Models.Post
+
+
 <article class="blog-post">
     <h1>
         @Html.ActionLink(Model.Title, "Post", "Blog",
@@ -9,7 +9,7 @@
         )
     </h1>
     <div class="details">
-        Posted <span>@Model.Posted</span> by <span>@Model.Author</span>
+        Posted <span>@Format.asReadableDate(Model.Posted)</span> by <span>@Model.Author</span>
     </div>
     <div class="content">
         @Model.Body
