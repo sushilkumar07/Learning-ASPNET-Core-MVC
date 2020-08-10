@@ -1,4 +1,5 @@
-﻿@*@model ExploreCalifornia.Models.Post*@
+﻿//@*@model ExploreCalifornia.Models.Post*@
+@model IEnumerable<ExploreCalifornia.Models.Post>
 @{
     Layout = "_Layout";
 }
@@ -8,19 +9,35 @@
     Below are a few of the latest posts from some of exploeres.
 </p>
 
-<div class="blog-post">    
+<div class="blog-post">
     TODO : Blog posts will go here.
-    @foreach(var posts in Model)
+    @*@foreach (var posts in Model)
+        {
+
+            <h1>@Model.</h1>
+            <div class="details">
+                Posted : <span>@Model.Posted</span> by
+                <span>@Model.Author</span>
+            </div>
+            <div class="content">
+                @Model.Body
+            </div>
+        }*@
+    @foreach (var post in Model)
     {
-    
-    <h1>@Model.Title</h1>
-    <div class="details">
-        Posted : <span>@Model.Posted</span> by
-        <span>@Model.Author</span>
-    </div>
-    <div class="content">
-        @Model.Body
-    </div>
-     }
+        <article class="blog-post">
+            <h1>
+                @Html.ActionLink(post.Title, "Post", "Blog",
+                    new { year = post.Posted.Year, month = post.Posted.Month, key = post.Key }
+                )
+            </h1>
+            <div class="details">
+                Posted <span>@post.Posted</span> by <span>@post.Author</span>
+            </div>
+            <div class="content">
+                @post.Body
+            </div>
+        </article>
+    }
 </div>
 
