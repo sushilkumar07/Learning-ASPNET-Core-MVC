@@ -1,0 +1,17 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model ExploreCalifornia.Models.Post
+<article class="blog-post">
+    <h1>
+        @Html.ActionLink(Model.Title, "Post", "Blog",
+            new { year = Model.Posted.Year, month = Model.Posted.Month, key = Model.Key }
+        )
+    </h1>
+    <div class="details">
+        Posted <span>@Model.Posted</span> by <span>@Model.Author</span>
+    </div>
+    <div class="content">
+        @Model.Body
+    </div>
+</article>
