@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -10,37 +9,37 @@ namespace ExploreCalifornia.Models
 {
     public class Post
     {
-        public long id { get; set; }
-        private string _Key;
+        public long Id { get; set; }
+
+        public string _key;
 
         public string Key
         {
             get
             {
-                if (_Key == null)
+                if (_key == null)
                 {
-                    _Key = Regex.Replace(Title.ToLower(), "[^a-z0-9]", "-");
+                    _key = Regex.Replace(Title.ToLower(), "[^a-z0-9]", "-");
                 }
-                return _Key;
+                return _key;
             }
-            set
-            {
-                _Key = value;
-            }
+            set { _key = value; }
         }
 
         [Display(Name = "Post Title")]
         [Required]
-        //[DataType(DataType.Password)]
         [DataType(DataType.Text)]
-        [StringLength(100, MinimumLength = 5, ErrorMessage = "Title must be between 5 to 100 characters")]
+        [StringLength(100, MinimumLength = 5,
+            ErrorMessage = "Title must be between 5 and 100 characters long")]
         public string Title { get; set; }
-        public DateTime Posted { get; set; }
+
         public string Author { get; set; }
-        [Display(Name = "Post Body")]
-        [DataType(DataType.MultilineText)]
+
         [Required]
-        [StringLength(100, ErrorMessage = "Body must be between characters long")]
+        [MinLength(100, ErrorMessage = "Blog posts must be at least 100 characters long")]
+        [DataType(DataType.MultilineText)]
         public string Body { get; set; }
+
+        public DateTime Posted { get; set; }
     }
 }

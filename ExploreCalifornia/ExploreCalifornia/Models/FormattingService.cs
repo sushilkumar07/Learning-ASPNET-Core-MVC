@@ -7,9 +7,9 @@ namespace ExploreCalifornia.Models
 {
     public class FormattingService
     {
-        public string asReadableDate(DateTime date)
+        public string AsReadableDate(DateTime date)
         {
-            return date.ToString("d");
+            return date.ToString("D");
         }
     }
 }

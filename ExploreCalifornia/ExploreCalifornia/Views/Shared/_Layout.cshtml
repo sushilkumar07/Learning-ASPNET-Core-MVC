@@ -12,6 +12,8 @@
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link href="/css/main.css" rel="stylesheet" type="text/css" media="screen, projection">
+    <script src="~/scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/scripts/site.js"></script>
 </head>
 <body id="home" class="no-js">
     <div id="wrapper">
@@ -50,17 +52,32 @@
                             @*<li><a href="/blog" title="read our blog!">Read our Blog</a></li>*@
                             @*here we are using HTML-HELEPER  tag*@
                             <li>@Html.ActionLink("Read our Blog", "Index", "Blog", null, new { title = "read our blog" })</li>
-                            <li><a href="@Url.Action("Index", "Blog")" , title="read our blog!">Read our Blog</a> </li>
+                            @*<li><a href="@Url.Action("Index", "Blog")" , title="read our blog!">Read our Blog</a> </li>*@
 
                             <li><a href="explorers/gallery.htm" title="contributor photos">Tour Photos</a></li>
                             <li><a href="_video/EC_podcast_full version.mov" title="check out our podcast">Video podcast</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="contact.htm" title="contact us" class="last">Contact <br /><span class="tagline">we're listening</span></a>
-                        <ul>
-                            <li><a href="support.htm" title="need help?">Support</a></li>
-                        </ul>
+                        @*<a href="contact.htm" title="contact us" class="last">Contact <br /><span class="tagline">we're listening</span></a>
+                            <ul>
+                                <li><a href="support.htm" title="need help?">Support</a></li>
+                            </ul>*@
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form id="logout" action="@Url.Action("Logout", "Account")" method="POST">
+                                <a href="javascript: $('#logout').submit()" class="last">
+                                    Logout
+                                    <br /><span class="tagline">@User.Identity.Name</span>
+                                </a>
+                            </form>
+                        }
+                        else
+                        {
+                            <a href="@Url.ActionLink("Login", "Account")" title="log in" class="last">
+                                Login
+                            </a>
+                        }
                     </li>
                 </ul>
             </nav>
