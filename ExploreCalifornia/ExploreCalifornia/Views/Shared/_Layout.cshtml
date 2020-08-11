@@ -1,4 +1,5 @@
-﻿<!DOCTYPE HTML>
+﻿@addTagHelper *, ExploreCalifornia
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -11,6 +12,8 @@
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link href="/css/main.css" rel="stylesheet" type="text/css" media="screen, projection">
+    <script src="~/scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/scripts/site.js"></script>
 </head>
 <body id="home" class="no-js">
     <div id="wrapper">
@@ -49,17 +52,32 @@
                             @*<li><a href="/blog" title="read our blog!">Read our Blog</a></li>*@
                             @*here we are using HTML-HELEPER  tag*@
                             <li>@Html.ActionLink("Read our Blog", "Index", "Blog", null, new { title = "read our blog" })</li>
-                            <li><a href="@Url.Action("Index", "Blog")" , title="read our blog!">Read our Blog</a> </li>
+                            @*<li><a href="@Url.Action("Index", "Blog")" , title="read our blog!">Read our Blog</a> </li>*@
 
                             <li><a href="explorers/gallery.htm" title="contributor photos">Tour Photos</a></li>
                             <li><a href="_video/EC_podcast_full version.mov" title="check out our podcast">Video podcast</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="contact.htm" title="contact us" class="last">Contact <br /><span class="tagline">we're listening</span></a>
-                        <ul>
-                            <li><a href="support.htm" title="need help?">Support</a></li>
-                        </ul>
+                        @*<a href="contact.htm" title="contact us" class="last">Contact <br /><span class="tagline">we're listening</span></a>
+                            <ul>
+                                <li><a href="support.htm" title="need help?">Support</a></li>
+                            </ul>*@
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form id="logout" action="@Url.Action("Logout", "Account")" method="POST">
+                                <a href="javascript: $('#logout').submit()" class="last">
+                                    Logout
+                                    <br /><span class="tagline">@User.Identity.Name</span>
+                                </a>
+                            </form>
+                        }
+                        else
+                        {
+                            <a href="@Url.ActionLink("Login", "Account")" title="log in" class="last">
+                                Login
+                            </a>
+                        }
                     </li>
                 </ul>
             </nav>
@@ -78,27 +96,28 @@
             </section>
             <aside id="secondaryContent">
                 <div id="specials" class="callOut">
-                    <h1>Monthly Specials</h1>
-                    <h2 class="top"><img src="/images/calm_bug.gif" alt="California Calm" width="75" height="75">California Calm</h2>
-                    <p>
-                        Day Spa Package <br>
-                        <a href="/tours/tour_detail_cycle.htm">$250</a>
-                    </p>
-                    <h2><img src="/images/desert_bug.gif" alt="From desert to sea" width="75" height="75">From Desert to Sea</h2>
-                    <p>
-                        2 Day Salton Sea <br>
-                        <a href="/tours/tour_detail_cycle.htm">$350</a>
-                    </p>
-                    <h2><img src="/images/backpack_bug.gif" alt="Backpack Cali" width="75" height="41">Backpack Cali</h2>
-                    <p>
-                        Big Sur Retreat <br>
-                        <a href="/tours/tour_detail_cycle.htm">$620</a>
-                    </p>
-                    <h2><img src="/images/taste_bug.gif" alt="Taste of California" width="75" height="75">Taste of California</h2>
-                    <p>
-                        Tapas &amp; Groves <br>
-                        <a href="/tours/tour_detail_taste.htm">$150</a>
-                    </p>
+                    @*<h1>Monthly Specials</h1>
+                        <h2 class="top"><img src="/images/calm_bug.gif" alt="California Calm" width="75" height="75">California Calm</h2>
+                        <p>
+                            Day Spa Package <br>
+                            <a href="/tours/tour_detail_cycle.htm">$250</a>
+                        </p>
+                        <h2><img src="/images/desert_bug.gif" alt="From desert to sea" width="75" height="75">From Desert to Sea</h2>
+                        <p>
+                            2 Day Salton Sea <br>
+                            <a href="/tours/tour_detail_cycle.htm">$350</a>
+                        </p>
+                        <h2><img src="/images/backpack_bug.gif" alt="Backpack Cali" width="75" height="41">Backpack Cali</h2>
+                        <p>
+                            Big Sur Retreat <br>
+                            <a href="/tours/tour_detail_cycle.htm">$620</a>
+                        </p>
+                        <h2><img src="/images/taste_bug.gif" alt="Taste of California" width="75" height="75">Taste of California</h2>
+                        <p>
+                            Tapas &amp; Groves <br>
+                            <a href="/tours/tour_detail_taste.htm">$150</a>
+                        </p>*@
+                    <vc:monthly-specials />
                 </div>
                 <div id="trivia" class="callOut">
                     <h1>Did You Know?</h1>

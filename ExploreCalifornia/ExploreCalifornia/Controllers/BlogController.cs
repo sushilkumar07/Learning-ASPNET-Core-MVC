@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ExploreCalifornia.dbcontext;
 using ExploreCalifornia.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExploreCalifornia.Controllers
@@ -16,10 +17,32 @@ namespace ExploreCalifornia.Controllers
             _db = db;
         }
         [Route("blog/")] // Controller level attribute routing 
-        public IActionResult Index()
+        //public IActionResult Index()
+        //{
+        //    var posts = _db.Posts.OrderByDescending(x => x.Posted).ToList();
+        //    //return new ContentResult { Content = "Blog post" };
+        //    return View(posts);
+        //}
+        public IActionResult Index(int page = 0)
         {
-            var posts = _db.Posts.OrderByDescending(x => x.Posted).ToList();
-            //return new ContentResult { Content = "Blog post" };
+            var pageSize = 2;
+            var totalPosts = _db.Posts.Count();
+            var totalPages = totalPosts / pageSize;
+            var previousPage = page - 1;
+            var nextPage = page + 1;
+
+            ViewBag.PreviousPage = previousPage;
+            ViewBag.HasPreviousPage = previousPage >= 0;
+            ViewBag.NextPage = nextPage;
+            ViewBag.HasNextPage = nextPage < totalPages;
+
+            var posts =
+                _db.Posts
+                    .OrderByDescending(x => x.Posted)
+                    .Skip(pageSize * page)
+                    .Take(pageSize)
+                    .ToArray();
+
             return View(posts);
         }
 
@@ -57,15 +80,15 @@ namespace ExploreCalifornia.Controllers
             //return View();
         }
 
+        [Authorize]
         [HttpGet, Route("blog/create")]
         public IActionResult Create()
         {
-
             return View();
         }
 
+        [Authorize]
         [HttpPost, Route("blog/create")]
-
         public IActionResult Create(Post post)
         {
             if (!ModelState.IsValid)

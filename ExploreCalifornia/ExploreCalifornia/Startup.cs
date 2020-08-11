@@ -7,6 +7,7 @@ using ExploreCalifornia.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,7 +40,15 @@ namespace ExploreCalifornia
                 var connectionString = configuration.GetConnectionString("BlogDataContext");
                 options.UseSqlServer(connectionString);
             });
-          
+            services.AddDbContext<IdentityDataContext>(options =>
+            {
+                var connectionString = configuration.GetConnectionString("IdentityDataContext");
+                options.UseSqlServer(connectionString);
+            });
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                  .AddEntityFrameworkStores<IdentityDataContext>();
+                  
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -89,6 +98,7 @@ namespace ExploreCalifornia
 
             /*Middle Ware :Use contain from wwwroot folder Use file server or serve static files*/
             app.UseFileServer();
+            
 
             //app.UseEndpoints(endpoints =>
             //{
